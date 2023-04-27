@@ -44,6 +44,16 @@
 					Debe seleccionar género.
 				</div>
 			</div>
+			
+			<div class="form-floating mb-3" >
+				<input type="text" class="form-control form-control-sm" id="nombrePaciente" name="nombrePaciente" placeholder="Ingrese nombre paciente" />
+				<label for="nombrePaciente" class="">Ingrese nombre:</label>
+				<div class="invalid-feedback">
+					Debe ingresar nombre paciente.
+				</div>
+			</div>
+			
+			
 		
 			<div class="form-floating mb-3" >
 				<input type="text" class="form-control form-control-sm" id="color" name="color" placeholder="Ingrese color paciente" />
