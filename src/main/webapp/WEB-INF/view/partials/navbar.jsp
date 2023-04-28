@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>    
+    
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/">Smokey</a>
@@ -54,9 +56,11 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/formularioLogin">Iniciar Sesión</a></li>
+            <li><a class="dropdown-item" href="#"><security:authentication property="principal.username" /></a></li>
+            <li><a class="dropdown-item" href="#">Rol:<security:authentication property="principal.authorities" /></a></li>
             <li><a class="dropdown-item" href="#">Configuración</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/formularioLogout">Cerrar Sesión</a></li>
           </ul>
         </li>
         
