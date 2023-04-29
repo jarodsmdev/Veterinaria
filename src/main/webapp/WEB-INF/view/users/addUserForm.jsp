@@ -10,7 +10,7 @@
 		<!-- FONTAWESOME CDN v5.2.0 -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		
-		<title>Eliminar Usuario</title>
+		<title>Crear Usuario</title>
 	</head>
 	<body class="container">
 		<header>
@@ -20,15 +20,15 @@
 		
 		<main>
 
-			<h2 class="text-center">Eliminar Usuario</h2>
+			<h2 class="text-center">Crear Usuario</h2>
 			
-			<form action="${pageContext.request.contextPath}/eliminarUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}">
+			<form action="${pageContext.request.contextPath}/crearUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				
 				<input type="hidden" name="username_id" value="${user.username}" />
 				
 				<div class="form-floating mb-3">
-					<input type="text" readonly class="form-control-plaintext" id="username" name="username" value="${user.username}" placeholder="Nombre de Usuario" required>
+					<input type="text" class="form-control form-control-sm" id="username" name="username" value="${user.username}" placeholder="Nombre de Usuario" required>
 					<label for="username">Nombre de Usuario:</label>
 					<div class="invalid-feedback">
 						Debe ingresar nombre de Usuario.
@@ -47,11 +47,11 @@
 				
 				<div class="form-check form-switch mb-3">
 					<input type="hidden" name="enabled" value="${user.enabled}" id="enabled-hidden">
-			    	<input type="checkbox" class="form-check-input" role="switch" id="enabled-visible" name="enabled-visible" ${user.enabled == 1 ? "checked" : ""} disabled/>
+			    	<input type="checkbox" class="form-check-input" role="switch" id="enabled-visible" name="enabled-visible" ${user.enabled == 1 ? "checked" : ""} />
 			    	<label class="form-check-label" for="enabled-visible">Habilitado</label>
 				</div>
 
-				<button type="submit" class="btn btn-danger btn-sm w-25">Eliminar <i class="fas fa-trash-alt"></i></button>
+				<button type="submit" class="btn btn-success btn-sm w-25">Guardar <i class="fas fa-save"></i></button>
 			</form>
 
 		</main>

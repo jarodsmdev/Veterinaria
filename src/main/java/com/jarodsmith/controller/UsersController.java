@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +19,7 @@ import com.jarodsmith.model.Users;
 
 
 @Controller
+@RequestMapping("/usuarios")
 public class UsersController {
 
 	/*
@@ -67,20 +69,63 @@ public class UsersController {
 	}
 	
 	@PostMapping("/actualizarUsuario")
-	public ModelAndView actualizarUsuario(@ModelAttribute("user") Users user, BindingResult result) {
+	public ModelAndView actualizarUsuario(@ModelAttribute("userForm") Users userForm, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("ESTOY EN EL METODO POST");
+		
 		//VALIDACION DE ERRORES
-		if(result.hasErrors()) {
+		/*if(result.hasErrors()) {
 			mav.setViewName("users/editUsersForm");
 			return mav;
 		}
-		
+		*/
+
 		//ACTUALIZAR AL USUARIO
-		userDAO.actualizar(user);
+		userDAO.actualizar(userForm);
 		
 		//REDIRECCIONAR A LA VISTA DE USUARIOS
-		mav.setViewName("redirect:/listaUsuarios");
+		mav.setViewName("redirect:/listarUsuarios");
+		return mav;
+	}
+	
+	@GetMapping("/nuevoUsuario")
+	public ModelAndView nuevoUsuario() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("users/addUserForm");
+		return mav;
+	}
+	
+	@PostMapping("/crearUsuario")
+		public ModelAndView nuevoUsuario(@ModelAttribute("userForm") Users userForm, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		//System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
+		//GUARDAR USUARIO
+		userDAO.insertar(userForm);
+		
+		//REDIRECCIONAR A LA VISTA DE USUARIOS
+		mav.setViewName("redirect:/listarUsuarios");
+		return mav;
+	}
+	
+	@GetMapping("/eliminarUsuario")
+	public ModelAndView eliminarUsuario(@RequestParam("usuario") String usuario) {
+		Users user = userDAO.buscarPorNombre(usuario);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("user", user);
+		mav.setViewName("users/deleteUsersForm");
+		return mav;
+	}
+	
+	@PostMapping("/eliminarUsuario")
+	public ModelAndView eliminarUsuario(@ModelAttribute("userForm") Users userForm, BindingResult result) {
+		ModelAndView mav = new ModelAndView();
+		//System.out.println("[POST]: " + userForm.toString()); //DEBUG
+		
+		//ELIMINAR AL USUARIO POR EL USERNAME
+		userDAO.borrarPorUsername(userForm.getUsername());
+	
+		//REDIRECCIONAR A LA VISTA DE USUARIOS
+		mav.setViewName("redirect:/listarUsuarios");
 		return mav;
 	}
 }

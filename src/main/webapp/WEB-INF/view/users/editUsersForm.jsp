@@ -21,11 +21,14 @@
 		<main>
 
 			<h2 class="text-center">Editar Usuario</h2>
-			<form action="${pageContext.request.contextPath}/actualizarUsuario" method="POST" class="need-validation" novalidate th:object="${user}">
-				<input type="hidden" name="id" value="${user.username}" />
+			
+			<form action="${pageContext.request.contextPath}/actualizarUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				
+				<input type="hidden" name="username_id" value="${user.username}" />
 				
 				<div class="form-floating mb-3">
-					<input type="text" class="form-control form-control-sm" id="username" name="username" value="${user.username}" placeholder="Nombre de Usuario" required>
+					<input type="text" readonly class="form-control-plaintext" id="username" name="username" value="${user.username}" placeholder="Nombre de Usuario" required>
 					<label for="username">Nombre de Usuario:</label>
 					<div class="invalid-feedback">
 						Debe ingresar nombre de Usuario.
@@ -43,8 +46,9 @@
 				</div>
 				
 				<div class="form-check form-switch mb-3">
-			    	<input type="checkbox" class="form-check-input" role="switch" id="enabled" name="enabled" ${user.enabled == 1 ? "checked" : ""} />
-			    	<label class="form-check-label" for="enabled">Habilitado</label>
+					<input type="hidden" name="enabled" value="${user.enabled}" id="enabled-hidden">
+			    	<input type="checkbox" class="form-check-input" role="switch" id="enabled-visible" name="enabled-visible" ${user.enabled == 1 ? "checked" : ""} />
+			    	<label class="form-check-label" for="enabled-visible">Habilitado</label>
 				</div>
 
 				<button type="submit" class="btn btn-success btn-sm w-25">Actualizar <i class="fas fa-save"></i></button>
@@ -54,6 +58,22 @@
 		
 		<footer>
 		</footer>
+		
+		<script>
+		//SCRIPT QUE CONTROLA EL CAMBIO DE VALUE DE 1 O 0 DEL CHECKBOX PARA LUEGO SER ENVIADO AL CONTROLADOR Y SETEE A ENABLED EL USUARIO.
+    		let enabledCheckbox = document.getElementById('enabled-visible');
+    		let enabledHidden = document.getElementById('enabled-hidden');
+
+    		enabledCheckbox.addEventListener('click', function() {
+        		if (enabledCheckbox.checked) {
+            		enabledHidden.value = 1;
+           			//alert("on")
+        		} else {
+            		enabledHidden.value = 0;
+            		//alert("off")
+        		}
+   			 });
+			</script>
 		
 		<!-- BOOTSTRAP JS CDN v5.2.3 -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>

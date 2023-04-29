@@ -32,6 +32,7 @@ public class SeguridadAppConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 		.antMatchers("/").hasRole("USUARIO")
+		.antMatchers("/usuarios/**").hasRole("ADMINISTRADOR")
 		.and().formLogin()
 		.loginPage("/formularioLogin")
 		.loginProcessingUrl("/autenticarUsuario")
