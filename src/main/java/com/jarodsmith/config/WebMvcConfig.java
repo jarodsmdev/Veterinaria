@@ -1,8 +1,5 @@
 package com.jarodsmith.config;
 
-
-
-
 import java.beans.PropertyVetoException;
 import java.util.logging.Logger;
 
@@ -15,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -30,7 +28,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @ComponentScan(basePackages = "com.jarodsmith")
 @PropertySource("classpath:persistencia-mysql.properties")
-public class AppConfig implements WebMvcConfigurer{
+public class WebMvcConfig implements WebMvcConfigurer{
 	
 	@Autowired
 	private Environment env;
@@ -71,7 +69,6 @@ public class AppConfig implements WebMvcConfigurer{
 			try {
 				seguridadDataSource.setDriverClass(env.getProperty("jdbc.driver"));
 			} catch (PropertyVetoException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
@@ -94,7 +91,6 @@ public class AppConfig implements WebMvcConfigurer{
 			return seguridadDataSource;
 		}
 		
-
 		
 		private int getPropPool(String nombreProp) {
 			
@@ -103,6 +99,6 @@ public class AppConfig implements WebMvcConfigurer{
 			
 			return propPool;
 		}
-	
+
 	
 }

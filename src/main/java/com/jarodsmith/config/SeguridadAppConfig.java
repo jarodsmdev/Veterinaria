@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -24,16 +25,6 @@ public class SeguridadAppConfig extends WebSecurityConfigurerAdapter {
 		
 		auth.jdbcAuthentication().dataSource(seguridadDataSource);
 		
-		//CONECTAR CON BBDD (POR AHORA NO)
-		/*UserBuilder usuarios = User.withDefaultPasswordEncoder();
-		
-		auth.inMemoryAuthentication()
-			.withUser(usuarios.username("Juan").password("123").roles("USUARIO", "AYUDANTE", "ADMINISTRADOR"))
-			.withUser(usuarios.username("Antonio").password("456").roles("USUARIO"))
-			.withUser(usuarios.username("Ana").password("789").roles("USUARIO", "AYUDANTE"))
-			.withUser(usuarios.username("Laura").password("321").roles("USUARIO", "ADMINISTRADOR"));
-		*/
-
 	}
 
 	@Override
@@ -49,6 +40,4 @@ public class SeguridadAppConfig extends WebSecurityConfigurerAdapter {
 		.and().exceptionHandling().accessDeniedPage("/acceso-denegado");
 	}
 	
-	
-
 }
