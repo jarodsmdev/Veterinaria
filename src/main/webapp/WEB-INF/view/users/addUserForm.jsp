@@ -50,31 +50,40 @@
 			    	<input type="checkbox" class="form-check-input" role="switch" id="enabled-visible" name="enabled-visible" ${user.enabled == 1 ? "checked" : ""} />
 			    	<label class="form-check-label" for="enabled-visible">Habilitado</label>
 				</div>
+				
+				<!-- SECCION DE ROLES -->
 
-				<button type="submit" class="btn btn-success btn-sm w-25">Guardar <i class="fas fa-save"></i></button>
+				<div class="row">
+				    <div class="col-5">
+				        <h5 class="text-center">Roles disponibles</h5>
+				        <select multiple class="form-control" id="roles-disponibles">
+				            <option value="USER">Usuario</option>
+				            <option value="ADMIN">Administrador</option>
+				        </select>
+				    </div>
+				    <div class="col-2 text-center">
+				        <br><br>
+				        <button type="button" class="btn btn-primary" id="btn-add-role">&gt;&gt;</button>
+				        <br><br>
+				        <button type="button" class="btn btn-danger" id="btn-remove-role">&lt;&lt;</button>
+				    </div>
+				    <div class="col-5">
+				        <h5 class="text-center">Roles asignados</h5>
+				        <select multiple class="form-control" id="roles-asignados" name="rolesAsignados"></select>
+				    </div>
+				</div>
+				
+				
+				<button type="submit" class="btn btn-success btn-sm w-100 mt-2">Guardar <i class="fas fa-save"></i></button>
 			</form>
 
 		</main>
 		
 		<footer>
 		</footer>
-		
-		<script>
-		//SCRIPT QUE CONTROLA EL CAMBIO DE VALUE DE 1 O 0 DEL CHECKBOX PARA LUEGO SER ENVIADO AL CONTROLADOR Y SETEE A ENABLED EL USUARIO.
-    		let enabledCheckbox = document.getElementById('enabled-visible');
-    		let enabledHidden = document.getElementById('enabled-hidden');
 
-    		enabledCheckbox.addEventListener('click', function() {
-        		if (enabledCheckbox.checked) {
-            		enabledHidden.value = 1;
-           			//alert("on")
-        		} else {
-            		enabledHidden.value = 0;
-            		//alert("off")
-        		}
-   			 });
-			</script>
-		
+		<!-- SELECCION DE ROLES JS -->
+		<script src="${pageContext.request.contextPath}/resources/js/seleccionRoles.js"></script>
 		<!-- BOOTSTRAP JS CDN v5.2.3 -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 	</body>
