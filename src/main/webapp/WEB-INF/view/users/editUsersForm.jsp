@@ -22,7 +22,7 @@
 
 			<h2 class="text-center">Editar Usuario</h2>
 			
-			<form action="${pageContext.request.contextPath}/actualizarUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}">
+			<form action="${pageContext.request.contextPath}/usuarios/actualizarUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				
 				<input type="hidden" name="username_id" value="${user.username}" />

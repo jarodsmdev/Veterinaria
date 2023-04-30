@@ -46,8 +46,8 @@
 								</c:if>
 							</td>
 							<td>
-								<a href="<c:url value='/editarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="text-primary"><i class="fas fa-pencil-alt"></i></a>
-								<a href="<c:url value='/eliminarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="text-danger"><i class="fas fa-trash-alt"></i></a>
+								<a href="<c:url value='/usuarios/editarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="text-primary"><i class="fas fa-pencil-alt"></i></a>
+								<a href="<c:url value='/usuarios/eliminarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="text-danger"><i class="fas fa-trash-alt"></i></a>
 							</td>
 						</tr>
 					</c:forEach>

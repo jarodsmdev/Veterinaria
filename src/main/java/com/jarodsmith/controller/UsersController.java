@@ -83,7 +83,7 @@ public class UsersController {
 		userDAO.actualizar(userForm);
 		
 		//REDIRECCIONAR A LA VISTA DE USUARIOS
-		mav.setViewName("redirect:/listarUsuarios");
+		mav.setViewName("redirect:/usuarios/listarUsuarios");
 		return mav;
 	}
 	
@@ -103,7 +103,7 @@ public class UsersController {
 		userDAO.insertar(userForm);
 		
 		//REDIRECCIONAR A LA VISTA DE USUARIOS
-		mav.setViewName("redirect:/listarUsuarios");
+		mav.setViewName("redirect:/usuarios/listarUsuarios");
 		return mav;
 	}
 	
@@ -125,7 +125,7 @@ public class UsersController {
 		userDAO.borrarPorUsername(userForm.getUsername());
 	
 		//REDIRECCIONAR A LA VISTA DE USUARIOS
-		mav.setViewName("redirect:/listarUsuarios");
+		mav.setViewName("redirect:/usuarios/listarUsuarios");
 		return mav;
 	}
 }

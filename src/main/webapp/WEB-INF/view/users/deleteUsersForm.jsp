@@ -22,7 +22,7 @@
 
 			<h2 class="text-center">Eliminar Usuario</h2>
 			
-			<form action="${pageContext.request.contextPath}/eliminarUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}">
+			<form action="${pageContext.request.contextPath}/usuarios/eliminarUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				
 				<input type="hidden" name="username_id" value="${user.username}" />
