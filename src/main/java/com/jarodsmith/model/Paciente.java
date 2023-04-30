@@ -1,9 +1,16 @@
+/**
+ * @author Leonel Briones Palacios
+ * @version 0.0.1
+ */
 package com.jarodsmith.model;
 
 import java.util.Date;
 
 public class Paciente {
 	
+	/**
+	 * Miembros de Clase: Atributos
+	 */
 	private int idPaciente;
 	private int idCliente;
 	private int idEspecie;
@@ -14,9 +21,24 @@ public class Paciente {
 	private String observaciones;
 	private Date fechaNacimiento;
 	
+	/**
+	 * Constructor predeterminado
+	 */
 	public Paciente() {
 	}
 	
+	/**
+	 * Constructor parametrizado
+	 * @param idPaciente
+	 * @param idCliente
+	 * @param idEspecie
+	 * @param nombre
+	 * @param genero
+	 * @param color
+	 * @param peso
+	 * @param observaciones
+	 * @param fechaNacimiento
+	 */
 	public Paciente(int idPaciente, int idCliente, int idEspecie, String nombre, String genero, String color,
 			float peso, String observaciones, Date fechaNacimiento) {
 		this.idPaciente = idPaciente;

@@ -1,13 +1,28 @@
+/**
+ * @author Leonel Briones Palacios
+ * @version 0.0.1
+ */
 package com.jarodsmith.model;
 
 public class Authorities {
 
+	/**
+	 * Miembros de Clase: Atributos
+	 */
 	private String username;
 	private String authority;
 	
+	/**
+	 * Constructor predeterminado
+	 */
 	public Authorities() {
 	}
 
+	/**
+	 * Constructor Parametrizado
+	 * @param username
+	 * @param authority
+	 */
 	public Authorities(String username, String authority) {
 		this.username = username;
 		this.authority = authority;
