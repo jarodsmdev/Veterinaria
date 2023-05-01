@@ -55,7 +55,7 @@ public class UserDAOImpl implements GenericDAO<Users> {
 	public void insertar(Users objeto) {
 		Object[]params = {objeto.getUsername(), objeto.getPassword(), objeto.getEnabled()};
 		jdbcTemplate.update(INSERT, params);
-		System.out.println("[DAO]: " + objeto.toString()); //DEBUG
+		//System.out.println("[DAO]: " + objeto.toString()); //DEBUG
 	}
 
 	@Override

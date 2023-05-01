@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.jarodsmith.dao.impl.AuthoritiesDAOImpl;
 import com.jarodsmith.dao.impl.UserDAOImpl;
@@ -77,7 +78,7 @@ public class UsersController {
 		user.setAuthorities(listaRoles);
 		
 		ModelAndView mav = new ModelAndView();
-		System.out.println("[GETEDITARUSUARIO]: " + user.toString());
+		//System.out.println("[GETEDITARUSUARIO]: " + user.toString()); //DEBUG
 		
 		//ENVIO EL OBJETO USERS A LA VISTA
 		mav.addObject("user", user);
@@ -87,7 +88,7 @@ public class UsersController {
 	
 	@PostMapping("/actualizarUsuario")
 	public ModelAndView actualizarUsuario(@ModelAttribute("userForm") Users userForm,
-										@RequestParam("rolesAsignados") List<String> rolesAsignados,
+			 							@RequestParam(value = "rolesAsignados", required = false) List<String> rolesAsignados,
 										BindingResult result) {
 		
 		ModelAndView mav = new ModelAndView();
@@ -104,27 +105,36 @@ public class UsersController {
 		//ASIGNAR NUEVOS ROLES AL USUARIO
 		List<Authorities> listaRoles = new ArrayList<>();
 
-	    for(String rol: rolesAsignados) {
+		if(rolesAsignados != null) {
+		    for(String rol: rolesAsignados) {
+		    	System.out.println("[ROL] " + rol);
+		        //CREAR UN OBJETO POR CADA ROL
+		        Authorities authorities = new Authorities();
+		        authorities.setUsername(userForm.getUsername());
+		        authorities.setAuthority(rol);
+		        
+		        System.out.println("[ACTUALIZARUSUARIO]: " + authorities.toString());
+		        
+		        //GUARDAR AUTHORITIES EN LA BD
+		        authoritiesDAO.insertar(authorities);
 
-	        //CREAR UN OBJETO POR CADA ROL
-	        Authorities authorities = new Authorities();
-	        authorities.setUsername(userForm.getUsername());
-	        authorities.setAuthority(rol);
+		        //AÑADIR CADA OBJETO A LA LISTA
+		        listaRoles.add(authorities);
 
-	        //AÑADIR CADA OBJETO A LA LISTA
-	        listaRoles.add(authorities);
+		    }
+		}
 
-	        //GUARDAR AUTHORITIES EN LA BD
-	        authoritiesDAO.insertar(authorities);
-
-	    }
-	    
 	    //AGREGAR LA LISTA AL OBJETO user
 	    userForm.setAuthorities(listaRoles);
+	    
+	    //ENCRIPTAR LA CONTRASEÑA ANTES DE GUARDAR EN BD
+  		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+  		String hashedPassword = passwordEncoder.encode(userForm.getPassword());
+  		userForm.setPassword(hashedPassword);
 
 		//ACTUALIZAR AL USUARIO
 		userDAO.actualizar(userForm);
-		System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
+		System.out.println("[ACTUALIZARUSUARIO]: " + userForm.toString()); //DEBUG
 		
 		//REDIRECCIONAR A LA VISTA DE USUARIOS
 		mav.setViewName("redirect:/usuarios/listarUsuarios");
@@ -160,6 +170,11 @@ public class UsersController {
 	
 		ModelAndView mav = new ModelAndView();
 		
+		//ENCRIPTAR LA CONTRASEÑA ANTES DE GUARDAR EN BD
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedPassword = passwordEncoder.encode(userForm.getPassword());
+		userForm.setPassword(hashedPassword);
+		
 		//GUARDAR USUARIO EN LA BD
 		userDAO.insertar(userForm);
 	
@@ -185,7 +200,7 @@ public class UsersController {
 		userForm.setAuthorities(listaRoles);
 		
 
-		System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
+		//System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
 		
 		//REDIRECCIONAR A LA VISTA DE USUARIOS
 		mav.setViewName("redirect:/usuarios/listarUsuarios");

@@ -36,7 +36,7 @@
 				</div>
 				
 				<div class="form-floating mb-3">
-					<input type="password" class="form-control form-control-sm" id="password" name="password" value="${user.password}" placeholder="Contraseña" required />
+					<input type="text" class="form-control form-control-sm" id="password" name="password" value="${user.password}" placeholder="Contraseña" required />
 					<label for="password">Contraseña:</label>
 					<div class="invalid-feedback">
 						Debe ingresar constraeña.
@@ -44,7 +44,7 @@
 				</div>
 				
 				<div class="form-floating mb-3">
-					<input type="password" class="form-control form-control-sm" id="password2" name="password2" value="${user.password}" placeholder="Repita su contraseña" required />
+					<input type="text" class="form-control form-control-sm" id="password2" name="password2" value="${user.password}" placeholder="Repita su contraseña" required />
 					<label for="password2">Repita su contraseña:</label>
 					<div class="invalid-feedback">
 						Debe ingresar contraseña.
@@ -63,8 +63,8 @@
 				    <div class="col-5">
 				        <h5 class="text-center">Roles disponibles</h5>
 				        <select multiple class="form-control" id="roles-disponibles">
-				            <option value="ROLE_USUARIO">Usuario</option>
-				            <option value="ROLE_ADMINISTRADOR">Administrador</option>
+				            <option value="ROLE_USUARIO">ROLE_USUARIO</option>
+				            <option value="ROLE_ADMINISTRADOR">ROLE_ADMINISTRADOR</option>
 				        </select>
 				    </div>
 				    <div class="col-2 text-center">
