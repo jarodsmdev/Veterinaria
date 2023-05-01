@@ -1,5 +1,6 @@
 package com.jarodsmith.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.jarodsmith.dao.impl.AuthoritiesDAOImpl;
 import com.jarodsmith.dao.impl.UserDAOImpl;
+import com.jarodsmith.model.Authorities;
 import com.jarodsmith.model.Users;
 
 
@@ -41,6 +44,9 @@ public class UsersController {
 	@Autowired
 	private UserDAOImpl userDAO;
 	
+	@Autowired
+	private AuthoritiesDAOImpl authoritiesDAO;
+	
 	/**
 	* Devuelve una vista con la lista de usuarios obtenidos desde la base de datos.
 	* @return ModelAndView objeto que representa la vista de la lista de usuarios
@@ -61,15 +67,29 @@ public class UsersController {
 	*/
 	@GetMapping("/editarUsuario")
 	public ModelAndView editarUsuario(@RequestParam("usuario") String usuario) {
+		//CREO UN OBJETO TIPO USERS CON LOS DATOS RECUPERADOS DEL DAO
 		Users user = userDAO.buscarPorNombre(usuario);
+		
+		//CREO UNA LISTA CON LOS ROLES RECUPERADOS DEL DAO
+		List<Authorities> listaRoles = authoritiesDAO.buscarRolesPorUsername(usuario);
+		
+		//SETEO LA LISTA DE ROLES AL OBJETO
+		user.setAuthorities(listaRoles);
+		
 		ModelAndView mav = new ModelAndView();
+		System.out.println("[GETEDITARUSUARIO]: " + user.toString());
+		
+		//ENVIO EL OBJETO USERS A LA VISTA
 		mav.addObject("user", user);
 		mav.setViewName("users/editUsersForm");
 		return mav;
 	}
 	
 	@PostMapping("/actualizarUsuario")
-	public ModelAndView actualizarUsuario(@ModelAttribute("userForm") Users userForm, BindingResult result) {
+	public ModelAndView actualizarUsuario(@ModelAttribute("userForm") Users userForm,
+										@RequestParam("rolesAsignados") List<String> rolesAsignados,
+										BindingResult result) {
+		
 		ModelAndView mav = new ModelAndView();
 		
 		//VALIDACION DE ERRORES
@@ -78,9 +98,33 @@ public class UsersController {
 			return mav;
 		}
 		*/
+		//ELIMINAR ROLES ANTIGUOS DEL USUARIO
+		authoritiesDAO.eliminarRolesPorUsername(userForm.getUsername());
+		
+		//ASIGNAR NUEVOS ROLES AL USUARIO
+		List<Authorities> listaRoles = new ArrayList<>();
+
+	    for(String rol: rolesAsignados) {
+
+	        //CREAR UN OBJETO POR CADA ROL
+	        Authorities authorities = new Authorities();
+	        authorities.setUsername(userForm.getUsername());
+	        authorities.setAuthority(rol);
+
+	        //AÑADIR CADA OBJETO A LA LISTA
+	        listaRoles.add(authorities);
+
+	        //GUARDAR AUTHORITIES EN LA BD
+	        authoritiesDAO.insertar(authorities);
+
+	    }
+	    
+	    //AGREGAR LA LISTA AL OBJETO user
+	    userForm.setAuthorities(listaRoles);
 
 		//ACTUALIZAR AL USUARIO
 		userDAO.actualizar(userForm);
+		System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
 		
 		//REDIRECCIONAR A LA VISTA DE USUARIOS
 		mav.setViewName("redirect:/usuarios/listarUsuarios");
@@ -95,18 +139,59 @@ public class UsersController {
 		return mav;
 	}
 	
-	@PostMapping("/crearUsuario")
+/*
+ 	@PostMapping("/crearUsuario")
 		public ModelAndView nuevoUsuario(@ModelAttribute("userForm") Users userForm, BindingResult result) {
 		ModelAndView mav = new ModelAndView();
-		//System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
+		
 		//GUARDAR USUARIO
 		userDAO.insertar(userForm);
+		System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
 		
 		//REDIRECCIONAR A LA VISTA DE USUARIOS
 		mav.setViewName("redirect:/usuarios/listarUsuarios");
 		return mav;
 	}
+ **/
+	@PostMapping("/crearUsuario")
+	public ModelAndView nuevoUsuario(@ModelAttribute("userForm") Users userForm,
+									@RequestParam("rolesAsignados") List<String> rolesAsignados,
+									BindingResult result) {
 	
+		ModelAndView mav = new ModelAndView();
+		
+		//GUARDAR USUARIO EN LA BD
+		userDAO.insertar(userForm);
+	
+		//ASIGNAR ROLES AL USUARIO
+		List<Authorities> listaRoles = new ArrayList<>();
+	
+		for(String rol: rolesAsignados) {
+			
+			//CREAMOS UN OBJETO POR CADA ROL
+			Authorities authorities = new Authorities();
+			authorities.setUsername(userForm.getUsername());
+			authorities.setAuthority(rol);
+			
+			//AÑADIREMOS CADA OBJETO A LA LISTA
+			listaRoles.add(authorities);
+			
+			//GUARDAR AUTHORITIES EN LA BD
+			authoritiesDAO.insertar(authorities);
+			
+		}
+		
+		//AGREGAR LA LISTA AL OBJETO user
+		userForm.setAuthorities(listaRoles);
+		
+
+		System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
+		
+		//REDIRECCIONAR A LA VISTA DE USUARIOS
+		mav.setViewName("redirect:/usuarios/listarUsuarios");
+		return mav;
+	}
+
 	@GetMapping("/eliminarUsuario")
 	public ModelAndView eliminarUsuario(@RequestParam("usuario") String usuario) {
 		Users user = userDAO.buscarPorNombre(usuario);

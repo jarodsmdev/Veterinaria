@@ -17,7 +17,7 @@ public class UserDAOImpl implements GenericDAO<Users> {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	final String GETONEFORID = "SELECT * FROM users WHERE id = ?;";
+	final String GETONEFORID = "SELECT * FROM users INNER JOIN authorities ON users.username = authorities.username";
 	final String GETONEFORNAME = "SELECT * FROM users WHERE username = ?;";
 	final String GETALL = "SELECT * FROM users;";
 	final String INSERT = "INSERT INTO users (username, password, enabled) VALUES (?, ? , ?)";
@@ -55,7 +55,7 @@ public class UserDAOImpl implements GenericDAO<Users> {
 	public void insertar(Users objeto) {
 		Object[]params = {objeto.getUsername(), objeto.getPassword(), objeto.getEnabled()};
 		jdbcTemplate.update(INSERT, params);
-		//System.out.println("[DAO]: " + objeto.toString()); //DEBUG
+		System.out.println("[DAO]: " + objeto.toString()); //DEBUG
 	}
 
 	@Override
