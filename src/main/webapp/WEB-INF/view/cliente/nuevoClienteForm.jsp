@@ -4,8 +4,13 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		
 		<!-- BOOTSTRAP v5.2.3 CDN -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+		
+		<!-- FONTAWESOME CDN v5.2.0 -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		
 		<title>Nuevo Cliente</title>
 	</head>
 	<body class="container">
@@ -20,7 +25,7 @@
 			
 		<form action="" method="POST" class="need-validation" novalidate>
 			<div class="form-floating mb-3" >
-				<input type="text" class="form-control form-control-sm" id="rut" name="rut" placeholder="Ingrese RUT Cliente" required="true"/>
+				<input type="text" class="form-control form-control-sm" id="rut" name="rut" placeholder="Ingrese RUT Cliente" required/>
 				<label for="rut" class="">RUT Cliente:</label>
 				<div class="invalid-feedback">
 					Debe ingresar RUT de Cliente.
@@ -67,7 +72,7 @@
 			
 			
 			<div class="mb-3">
-				<input type="submit" value="Guardar" class="btn btn-success btn-sm" />			
+				<button type="submit" class="btn btn-success btn-sm w-25">Guardar <i class="fas fa-save"></i></button>		
 			</div>
 			
 		</form>

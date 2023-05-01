@@ -1,18 +1,36 @@
+/**
+ * @author Leonel Briones Palacios
+ * @version 0.0.1
+ */
 package com.jarodsmith.model;
 
 import java.util.Date;
 
 public class Atencion {
 
+	/**
+	 * Miembos de clase: Atributos
+	 */
 	private int idAtencion;
 	private int idPaciente;
 	private int idServicio;
 	private String username;
 	private Date fechaAtencion;
 	
+	/**
+	 * Constructor Predeterminado
+	 */
 	public Atencion() {
 	}
 
+	/**
+	 * Constructor Parametrizado
+	 * @param idAtencion
+	 * @param idPaciente
+	 * @param idServicio
+	 * @param username
+	 * @param fechaAtencion
+	 */
 	public Atencion(int idAtencion, int idPaciente, int idServicio, String username, Date fechaAtencion) {
 		this.idAtencion = idAtencion;
 		this.idPaciente = idPaciente;

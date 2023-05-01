@@ -26,18 +26,18 @@
 		
 		<div class="row">
 			<div class="form-floating mb-1 col-6 col-sm-4 border">
-				<input type="text" readlonly class="form-control-plaintext" id="nombreCliente" value="Juan" />
+				<input type="text" readonly class="form-control-plaintext" id="nombreCliente" value="Juan" />
 				<label for="nombreCliente" >Nombre:</label>
 			</div>
 			
 			<div class="form-floating mb-1 col-6 col-sm-4 border">
-				<input type="text" readlonly class="form-control-plaintext" id="apellidoCliente" value="Pérez" />
+				<input type="text" readonly class="form-control-plaintext" id="apellidoCliente" value="Pérez" />
 				<label for="apellidoCliente" >Apellido:</label>
 			</div>
 			
 			<div class="form-floating mb-1 col-12 col-sm-4 border">
-				<input type="text" readlonly class="form-control-plaintext" id="telefonoCliente" value="+56912345678" />
-				<label for=""telefonoCliente"" >Teléfono:</label>
+				<input type="text" readonly class="form-control-plaintext" id="telefonoCliente" value="+56912345678" />
+				<label for="telefonoCliente" >Teléfono:</label>
 			</div>
 		</div>
 		

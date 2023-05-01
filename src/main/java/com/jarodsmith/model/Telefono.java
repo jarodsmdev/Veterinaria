@@ -1,11 +1,27 @@
+/**
+ * @author Leonel Briones Palacios
+ * @version 0.0.1
+ */
 package com.jarodsmith.model;
 
 public class Telefono {
+	
+	/**
+	 * Miembros de clase: Atributos
+	 */
 	private int idTelefono;
 	private String telefono;
 	
+	/**
+	 * Constructor predeterminado
+	 */
 	public Telefono() {}
 	
+	/**
+	 * Constructor parametrizado
+	 * @param idTelefono
+	 * @param telefono
+	 */
 	public Telefono(int idTelefono, String telefono) {
 		this.idTelefono = idTelefono;
 		this.telefono = telefono;

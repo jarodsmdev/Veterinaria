@@ -50,6 +50,21 @@
           </ul>
         </li>
         
+        <!-- MENU SOLO VISIBLE PARA ADMINISTRADORES -->
+        <security:authorize access="hasRole('ADMINISTRADOR')">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Gestión Usuarios
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios/nuevoUsuario">Crear Usuario</a></li>
+            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios/listarUsuarios">Listar Usuarios</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        </security:authorize>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Menú Usuario
@@ -63,6 +78,7 @@
             <li><a class="dropdown-item" href="${pageContext.request.contextPath}/formularioLogout">Cerrar Sesión</a></li>
           </ul>
         </li>
+
         
       </ul>
       <form class="d-flex" role="search">

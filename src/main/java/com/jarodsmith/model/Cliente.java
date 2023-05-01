@@ -1,7 +1,14 @@
+/**
+ * @author Leonel Briones Palacios
+ * @version 0.0.1
+ */
 package com.jarodsmith.model;
 
 public class Cliente {
 	
+	/**
+	 * Miembros de Clase: atributos
+	 */
 	private int idCliente;
 	private int idTelefono;
 	private String rut;
@@ -10,8 +17,21 @@ public class Cliente {
 	private String direccion;
 	private String email;
 	
+	/**
+	 * Constructor predeterminado
+	 */
 	public Cliente() {}
 
+	/**
+	 * Constructor Parametrizado
+	 * @param idCliente
+	 * @param idTelefono
+	 * @param rut
+	 * @param nombre
+	 * @param apellido
+	 * @param direccion
+	 * @param email
+	 */
 	public Cliente(int idCliente, int idTelefono, String rut, String nombre, String apellido, String direccion,
 			String email) {
 		this.idCliente = idCliente;

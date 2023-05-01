@@ -13,12 +13,13 @@ public class MiServletSpringInitializer extends AbstractAnnotationConfigDispatch
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 
-		return new Class[] {AppConfig.class};
+		return new Class[] {WebMvcConfig.class};
 	}
 
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
 	}
+	
 
 }

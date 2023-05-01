@@ -1,14 +1,30 @@
+/**
+ * @author Leonel Briones Palacios
+ * @version 0.0.1
+ */
 package com.jarodsmith.model;
 
 public class Servicio {
 
+	/**
+	 * Miembros de clase: Atributos
+	 */
 	private int idServicio;
 	private String servicio;
 	private int valor;
 	
+	/**
+	 * Constructor predeterminado
+	 */
 	public Servicio() {
 	}
 
+	/**
+	 * Constructor parametrizado
+	 * @param idServicio
+	 * @param servicio
+	 * @param valor
+	 */
 	public Servicio(int idServicio, String servicio, int valor) {
 		this.idServicio = idServicio;
 		this.servicio = servicio;
