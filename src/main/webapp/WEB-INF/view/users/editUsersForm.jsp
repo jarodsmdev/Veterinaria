@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -36,12 +38,12 @@
 				</div>
 				
 				<div class="form-floating mb-3">
-					<input type="password" class="form-control form-control-sm" id="password" name="password" value="${user.password}" placeholder="Contraseña" required>
+					<input type="text" class="form-control form-control-sm" id="password" name="password" value="${user.password}" placeholder="Contraseña" required>
 					<label for="password">Contraseña:</label>
 				</div>
 				
 				<div class="form-floating mb-3">
-					<input type="password" class="form-control form-control-sm" id="password2" name="password2" value="${user.password}" placeholder="Repita su contraseña" required>
+					<input type="text" class="form-control form-control-sm" id="password2" name="password2" value="${user.password}" placeholder="Repita su contraseña" required>
 					<label for="password2">Repita su contraseña:</label>
 				</div>
 				
@@ -57,9 +59,9 @@
 				    <div class="col-5">
 				        <h5 class="text-center">Roles disponibles</h5>
 				        <select multiple class="form-control" id="roles-disponibles">
-				            <option value="ROLE_USUARIO">Usuario</option>
-				            <option value="ROLE_ADMINISTRADOR">Administrador</option>
-				        </select>
+							<option value="ROLE_USUARIO">ROLE_USUARIO</option>
+							<option value="ROLE_ADMINISTRADOR">ROLE_ADMINISTRADOR</option>
+						</select>
 				    </div>
 				    <div class="col-2 text-center">
 				        <br><br>
@@ -69,7 +71,11 @@
 				    </div>
 				    <div class="col-5">
 				        <h5 class="text-center">Roles asignados</h5>
-				        <select multiple class="form-control" id="roles-asignados" name="rolesAsignados"></select>
+				        <select multiple class="form-control" id="roles-asignados" name="rolesAsignados">
+				        	<c:forEach var="authority" items="${user.authorities}">
+				        		<option value="${authority.authority}" selected>${authority.authority}</option>
+				        	</c:forEach>
+				        </select>
 				    </div>
 				</div>
 

@@ -13,7 +13,7 @@ USE VETERINARIA_PORTFOLIO;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users(
 	username VARCHAR(50) NOT NULL UNIQUE,
-	password VARCHAR(50) NOT NULL,
+	password VARCHAR(128) NOT NULL,
 	enabled TINYINT(1) NOT NULL,
 	PRIMARY KEY (username)
 ) ENGINE=InnoDB;
@@ -23,10 +23,10 @@ CREATE TABLE users(
 -- Todas las contraseñas son '123' y todas las cuentas están habilitadas
 INSERT INTO users
 VALUES
-('Admin', '{noop}123', 1),
-('Leonel', '{noop}123', 1),
-('Viviana', '{noop}123', 1),
-('Antonella', '{noop}123', 1),
+('Admin', '$2a$10$/YoeJjW5u7KwfO7KKv59k.xm/iuqTM6NRR3jEOZ.Lb7W/LEx2pL3W', 1),
+('Leonel', '$2a$10$/YoeJjW5u7KwfO7KKv59k.xm/iuqTM6NRR3jEOZ.Lb7W/LEx2pL3W', 1),
+('Viviana', '$2a$10$/YoeJjW5u7KwfO7KKv59k.xm/iuqTM6NRR3jEOZ.Lb7W/LEx2pL3W', 1),
+('Antonella', '$2a$10$/YoeJjW5u7KwfO7KKv59k.xm/iuqTM6NRR3jEOZ.Lb7W/LEx2pL3W', 1),
 ('Isidora', '{noop}123', 1);
 
 -- Crea la tabla 'authorities' que almacena los roles de los usuarios
