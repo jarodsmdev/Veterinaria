@@ -13,11 +13,11 @@ import javax.validation.constraints.Size;
 public class Users {
 
 	/**
-	* Miembros de Clase
+	* Miembros de Clase: propiedades
 	*/
 	@NotNull
 	@NotBlank(message = "Campo requerido")
-	@Size(min=2, message= "Campo requerido")
+	//@Size(min = 2, message= "Campo requerido")
 	private String username;
 	@NotNull
 	@NotBlank(message = "Campo requerido")
@@ -45,6 +45,7 @@ public class Users {
 		this.authorities = authorities;
 	}
 
+	
 	public String getUsername() {
 		return username;
 	}

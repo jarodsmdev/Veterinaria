@@ -52,6 +52,8 @@
 					<div class="form-floating mb-3 col-6">
 						<input type="password" class="form-control form-control-sm" id="password" name="password" value="${user.password}" placeholder="Contraseña" required autocomplete="off"/>
 						<label for="password" class="ms-2">Contraseña:</label>
+						<form:errors path="password" />
+						
 						<div class="invalid-feedback errorMsg">
 							Debe ingresar constraseña.
 						</div>
@@ -60,6 +62,7 @@
 					<div class="form-floating mb-3 col-6">
 						<input type="password" class="form-control form-control-sm" id="password2" name="password2" value="${user.password}" placeholder="Repita su contraseña" required autocomplete="off"/>
 						<label for="password2" class="ms-2">Repita su contraseña:</label>
+						<form:errors path="password" />
 						<div class="invalid-feedback errorMsg">
 							Debe ingresar contraseña.
 						</div>
