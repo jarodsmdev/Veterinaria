@@ -1,26 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<!-- BOOTSTRAP v5.2.3 CDN -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-		
-		<!-- FONTAWESOME CDN v5.2.0 -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+			<!-- INCRUSTA HEAD -->
+			<jsp:include page="./../partials/head.jsp" />
 		
 		<title>Crear Usuario</title>
 	</head>
-	<body class="container">
+	<body>
 		<header>
 			<!-- Incrusta header -->
 			<jsp:include page="./../partials/navbar.jsp" />
 		</header>
 		
-		<main>
+		<main  class="container">
 
-			<h2 class="text-center">Crear Usuario</h2>
+			<h2 class="text-center my-5">Crear Usuario</h2>
+			
+			<hr>
+			
+			<c:if test="${not empty error}">
+  				<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alerta">
+  					<strong><i class="fas fa-exclamation-circle"></i></strong> ${error}.
+ 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			</c:if>
+
+			<a href="${pageContext.request.contextPath}/usuarios/listarUsuarios" class="btn btn-primary btn-sm my-2"><i class="fas fa-users"></i> Listar Usuarios </a>
+			
+			<hr>
 			
 			<form action="${pageContext.request.contextPath}/usuarios/crearUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}" />
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -28,31 +39,33 @@
 				<input type="hidden" name="username_id" value="${user.username}" />
 				
 				<div class="form-floating mb-3">
-					<input type="text" class="form-control form-control-sm" id="username" name="username" value="${user.username}" placeholder="Nombre de Usuario" required />
+					<input type="text" class="form-control form-control-sm" id="username" name="username" value="${user.username}" placeholder="Nombre de Usuario" required autocomplete="off"/>
 					<label for="username">Nombre de Usuario:</label>
 					<div class="invalid-feedback">
 						Debe ingresar nombre de Usuario.
 					</div>
 				</div>
 				
-				<div class="form-floating mb-3">
-					<input type="text" class="form-control form-control-sm" id="password" name="password" value="${user.password}" placeholder="Contraseña" required />
-					<label for="password">Contraseña:</label>
-					<div class="invalid-feedback">
-						Debe ingresar constraeña.
+				<div class="row">
+					<div class="form-floating mb-3 col-6">
+						<input type="password" class="form-control form-control-sm" id="password" name="password" value="${user.password}" placeholder="Contraseña" required autocomplete="off"/>
+						<label for="password" class="ms-2">Contraseña:</label>
+						<div class="invalid-feedback errorMsg">
+							Debe ingresar constraseña.
+						</div>
 					</div>
-				</div>
-				
-				<div class="form-floating mb-3">
-					<input type="text" class="form-control form-control-sm" id="password2" name="password2" value="${user.password}" placeholder="Repita su contraseña" required />
-					<label for="password2">Repita su contraseña:</label>
-					<div class="invalid-feedback">
-						Debe ingresar contraseña.
+					
+					<div class="form-floating mb-3 col-6">
+						<input type="password" class="form-control form-control-sm" id="password2" name="password2" value="${user.password}" placeholder="Repita su contraseña" required autocomplete="off"/>
+						<label for="password2" class="ms-2">Repita su contraseña:</label>
+						<div class="invalid-feedback errorMsg">
+							Debe ingresar contraseña.
+						</div>
 					</div>
 				</div>
 				
 				<div class="form-check form-switch mb-3">
-					<input type="hidden" name="enabled" value="${user.enabled}" id="enabled-hidden">
+					<input type="hidden" name="enabled" value="${user.enabled}" id="enabled-hidden" value="0">
 			    	<input type="checkbox" class="form-check-input" role="switch" id="enabled-visible" name="enabled-visible" ${user.enabled == 1 ? "checked" : ""} />
 			    	<label class="form-check-label" for="enabled-visible">Habilitado</label>
 				</div>
@@ -79,7 +92,10 @@
 				    </div>
 				</div>
 				
-				<button type="submit" class="btn btn-success btn-sm w-100 mt-2">Guardar <i class="fas fa-save"></i></button>
+				<hr>
+				<div class="row justify-content-end mt-2">
+					<button type="submit" class="btn btn-success btn-sm w-50 my-2" id="btnEnviar" disabled><i class="fas fa-save"></i> Guardar</button>
+				</div>
 			</form>
 
 		</main>
