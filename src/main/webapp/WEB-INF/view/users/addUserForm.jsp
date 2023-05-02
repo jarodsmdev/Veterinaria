@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -33,18 +34,19 @@
 			
 			<hr>
 			
-			<form action="${pageContext.request.contextPath}/usuarios/crearUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}" />
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				
-				<input type="hidden" name="username_id" value="${user.username}" />
-				
+			<form:form action="${pageContext.request.contextPath}/usuarios/crearUsuario" modelAttribute="userForm" method="POST" >
+				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+ 
 				<div class="form-floating mb-3">
 					<input type="text" class="form-control form-control-sm" id="username" name="username" value="${user.username}" placeholder="Nombre de Usuario" required autocomplete="off"/>
+					
 					<label for="username">Nombre de Usuario:</label>
+					<form:errors path="username" />
 					<div class="invalid-feedback">
 						Debe ingresar nombre de Usuario.
 					</div>
 				</div>
+				
 				
 				<div class="row">
 					<div class="form-floating mb-3 col-6">
@@ -96,7 +98,7 @@
 				<div class="row justify-content-end mt-2">
 					<button type="submit" class="btn btn-success btn-sm w-50 my-2" id="btnEnviar" disabled><i class="fas fa-save"></i> Guardar</button>
 				</div>
-			</form>
+			</form:form>
 
 		</main>
 		

@@ -6,12 +6,21 @@ package com.jarodsmith.model;
 
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Users {
 
 	/**
-	 * Miembros de Clase
-	 */
+	* Miembros de Clase
+	*/
+	@NotNull
+	@NotBlank(message = "Campo requerido")
+	@Size(min=2, message= "Campo requerido")
 	private String username;
+	@NotNull
+	@NotBlank(message = "Campo requerido")
 	private String password;
 	private int enabled;
 	private List<Authorities> authorities;
