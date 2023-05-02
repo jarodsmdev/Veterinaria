@@ -33,37 +33,39 @@
 			
 			<hr>
 		
-			<table class="table table-bordered table-striped table-hover table-sm">
-				<thead>
-					<tr>
-						<th>Usuario</th>
-						<th>Contraseña</th>
-						<th>Habilitado</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${datos}" var="dato">
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped table-hover table-sm">
+					<thead>
 						<tr>
-							<td><c:out value="${dato.username}" /></td>
-							<td><c:out value="${dato.password}" /></td>
-							<td class="text-center">
-								  <c:if test="${dato.enabled == 1}">
-    								<i class="fas fa-check-circle text-success"></i>
-  								</c:if>
-								<c:if test="${dato.enabled != 1}">
-								    <i class="fas fa-times-circle text-danger"></i>
-								</c:if>
-							</td>
-							<td class="d-flex justify-content-evenly">
-								<a href="<c:url value='/usuarios/editarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="btn btn-outline-primary btn-sm"><i class="fas fa-user-edit"></i></a>
-								<a href="<c:url value='/usuarios/eliminarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="btn btn-outline-danger btn-sm"><i class="fas fa-user-minus"></i></a>
-							</td>
+							<th>Usuario</th>
+							<th>Contraseña</th>
+							<th>Habilitado</th>
+							<th>Acciones</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-		
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach items="${datos}" var="dato">
+							<tr>
+								<td><c:out value="${dato.username}" /></td>
+								<td><c:out value="${dato.password}" /></td>
+								<td class="text-center">
+									  <c:if test="${dato.enabled == 1}">
+	    								<i class="fas fa-check-circle text-success"></i>
+	  								</c:if>
+									<c:if test="${dato.enabled != 1}">
+									    <i class="fas fa-times-circle text-danger"></i>
+									</c:if>
+								</td>
+								<td class="d-flex justify-content-evenly">
+									<a href="<c:url value='/usuarios/editarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="btn btn-outline-primary btn-sm mx-1"><i class="fas fa-user-edit"></i></a>
+									<a href="<c:url value='/usuarios/eliminarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="btn btn-outline-danger btn-sm mx-1"><i class="fas fa-user-minus"></i></a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+			
+				</table>
+			</div>
 		</main>
 		
 		<footer>

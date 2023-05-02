@@ -39,7 +39,7 @@ CREATE TABLE authorities (
 	authority VARCHAR(50) NOT NULL,
 	UNIQUE KEY authorities_idx_1 (username, authority),
 	CONSTRAINT authorities_ibfk_1 FOREIGN KEY (username)
-    REFERENCES users (username)
+    REFERENCES users (username) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 -- Inserta algunos datos de prueba en la tabla 'authorities'
@@ -137,4 +137,6 @@ ALTER TABLE atencion
 ADD CONSTRAINT atencion_idfk_1 FOREIGN KEY (idPaciente) REFERENCES paciente (idPaciente),
 ADD CONSTRAINT atencion_idfk_2 FOREIGN KEY (idServicio) REFERENCES servicio (idServicio),
 ADD CONSTRAINT atencion_idfk_3 FOREIGN KEY (username) REFERENCES users (username);
+
+
 
