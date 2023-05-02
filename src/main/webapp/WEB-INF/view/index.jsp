@@ -4,19 +4,20 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Home Page</title>
-		<!-- BOOTSTRAP v5.2.3 CDN -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-		<!-- CUSTOM CSS -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css">
+		<!-- INCRUSTA HEAD -->
+		<jsp:include page="./partials/head.jsp" />
+		
 	</head>
-	<body class="container">
+	<body>
 		<header>
 			<!-- Incrusta header -->
 			<jsp:include page="./partials/navbar.jsp" />
 		</header>
 
-		<main>
-			<h2 class="text-center">Consulta Veterinaria</h2>
+		<main class="container">
+			<h2 class="text-center my-5">Consulta Veterinaria</h2>
+			
+			<hr>
 		
 		</main>
 		

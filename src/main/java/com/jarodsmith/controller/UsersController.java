@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.jarodsmith.dao.impl.AuthoritiesDAOImpl;
@@ -25,22 +28,6 @@ import com.jarodsmith.model.Users;
 @Controller
 @RequestMapping("/usuarios")
 public class UsersController {
-
-	/*
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
-	
-	@GetMapping("/listarUsuarios")
-	public ModelAndView listUsers() {
-		String sql = "SELECT * FROM users";
-		ModelAndView mav = new ModelAndView();
-		List datos = this.jdbcTemplate.queryForList(sql);
-		mav.addObject("datos",datos);
-		mav.setViewName("users/listForm");
-		return mav;
-	}
-	*/
-	
 	
 	@Autowired
 	private UserDAOImpl userDAO;
@@ -144,67 +131,65 @@ public class UsersController {
 	@GetMapping("/nuevoUsuario")
 	public ModelAndView nuevoUsuario() {
 		ModelAndView mav = new ModelAndView();
-		
 		mav.setViewName("users/addUserForm");
 		return mav;
 	}
 	
-/*
- 	@PostMapping("/crearUsuario")
-		public ModelAndView nuevoUsuario(@ModelAttribute("userForm") Users userForm, BindingResult result) {
-		ModelAndView mav = new ModelAndView();
-		
-		//GUARDAR USUARIO
-		userDAO.insertar(userForm);
-		System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
-		
-		//REDIRECCIONAR A LA VISTA DE USUARIOS
-		mav.setViewName("redirect:/usuarios/listarUsuarios");
-		return mav;
-	}
- **/
+
 	@PostMapping("/crearUsuario")
 	public ModelAndView nuevoUsuario(@ModelAttribute("userForm") Users userForm,
-									@RequestParam("rolesAsignados") List<String> rolesAsignados,
+									@RequestParam(value = "rolesAsignados", required = false) List<String> rolesAsignados,
 									BindingResult result) {
-	
-		ModelAndView mav = new ModelAndView();
+		try {
+			System.out.println("[USERCONTROLLER] " + userForm);
+			
+			ModelAndView mav = new ModelAndView();
+			
+			//ENCRIPTAR LA CONTRASEÑA ANTES DE GUARDAR EN BD
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String hashedPassword = passwordEncoder.encode(userForm.getPassword());
+			userForm.setPassword(hashedPassword);
+			
+			//GUARDAR USUARIO EN LA BD
+			userDAO.insertar(userForm);
 		
-		//ENCRIPTAR LA CONTRASEÑA ANTES DE GUARDAR EN BD
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String hashedPassword = passwordEncoder.encode(userForm.getPassword());
-		userForm.setPassword(hashedPassword);
+			//ASIGNAR ROLES AL USUARIO
+			List<Authorities> listaRoles = new ArrayList<>();
 		
-		//GUARDAR USUARIO EN LA BD
-		userDAO.insertar(userForm);
-	
-		//ASIGNAR ROLES AL USUARIO
-		List<Authorities> listaRoles = new ArrayList<>();
-	
-		for(String rol: rolesAsignados) {
+			if(rolesAsignados != null) {
+				for(String rol: rolesAsignados) {
+					
+					//CREAMOS UN OBJETO POR CADA ROL
+					Authorities authorities = new Authorities();
+					authorities.setUsername(userForm.getUsername());
+					authorities.setAuthority(rol);
+					
+					//AÑADIREMOS CADA OBJETO A LA LISTA
+					listaRoles.add(authorities);
+					
+					//GUARDAR AUTHORITIES EN LA BD
+					authoritiesDAO.insertar(authorities);
+					
+				}
+			}
 			
-			//CREAMOS UN OBJETO POR CADA ROL
-			Authorities authorities = new Authorities();
-			authorities.setUsername(userForm.getUsername());
-			authorities.setAuthority(rol);
+			//AGREGAR LA LISTA AL OBJETO user
+			userForm.setAuthorities(listaRoles);
 			
-			//AÑADIREMOS CADA OBJETO A LA LISTA
-			listaRoles.add(authorities);
+			//System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
 			
-			//GUARDAR AUTHORITIES EN LA BD
-			authoritiesDAO.insertar(authorities);
-			
+			//REDIRECCIONAR A LA VISTA DE USUARIOS
+			mav.addObject("success", "Usuario creado satisfactoriamente.");
+			mav.setViewName("redirect:/usuarios/listarUsuarios");
+			return mav;
+		} catch (DuplicateKeyException ex) {
+		    // CONTROLA EL ERROR DE CLAVE PRIMARIA DUPLICADA
+		    System.out.println("[ERROR USERCONTROLLER] " + ex);
+		    ModelAndView mav = new ModelAndView();
+		    mav.addObject("error", "El nombre de usuario ya está en uso. Por favor, elija otro nombre de usuario.");
+		    mav.setViewName("users/addUserForm");
+		    return mav;
 		}
-		
-		//AGREGAR LA LISTA AL OBJETO user
-		userForm.setAuthorities(listaRoles);
-		
-
-		//System.out.println("[USERFORM]: " + userForm.toString()); //DEBUG
-		
-		//REDIRECCIONAR A LA VISTA DE USUARIOS
-		mav.setViewName("redirect:/usuarios/listarUsuarios");
-		return mav;
 	}
 
 	@GetMapping("/eliminarUsuario")

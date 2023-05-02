@@ -1,26 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		
-		<!-- BOOTSTRAP v5.2.3 CDN -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-		
-		<!-- FONTAWESOME CDN v5.2.0 -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+			<!-- INCRUSTA HEAD -->
+			<jsp:include page="./../partials/head.jsp" />
 		
 		<title>Nuevo Cliente</title>
 	</head>
-	<body class="container">
+	<body>
 		<header>
 			<!-- Incrusta header -->
 			<jsp:include page="../partials/navbar.jsp" />
 		</header>
 	
-	<main>
-		<h2 class="text-center">Creación de Cliente</h2>
+	<main class="container">
+		<h2 class="text-center my-5">Creación de Cliente</h2>
 		<hr>
 			
 		<form action="" method="POST" class="need-validation" novalidate>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -7,21 +6,32 @@
 	<head>
 		<meta charset="UTF-8">
 		
-		<!-- BOOTSTRAP v5.2.3 CDN -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+			<!-- INCRUSTA HEAD -->
+			<jsp:include page="./../partials/head.jsp" />
 		
-		<!-- FONTAWESOME CDN v5.2.0 -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 		<title>Usuarios</title>
 	</head>
-	<body class="container">
+	<body>
 		<header>
 			<!-- Incrusta header -->
 			<jsp:include page="./../partials/navbar.jsp" />
 		</header>
 		
-		<main>
-			<h2 class="text-center">Lista de Usuarios</h2>
+		<main  class="container">
+			<h2 class="text-center my-5">Lista de Usuarios</h2>
+			
+			<hr>
+			
+			<c:if test="${not empty success}">
+  				<div class="alert alert-success alert-dismissible fade show" role="alert">
+  					<strong><i class="fas fa-check-circle"></i></strong> ${success}.
+ 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			</c:if>
+			
+			<a href="${pageContext.request.contextPath}/usuarios/nuevoUsuario" class="btn btn-primary btn-sm my-2"><i class="fas fa-plus-circle"></i> Crear Usuario</a>
+			
+			<hr>
 		
 			<table class="table table-bordered table-striped table-hover table-sm">
 				<thead>
@@ -45,9 +55,9 @@
 								    <i class="fas fa-times-circle text-danger"></i>
 								</c:if>
 							</td>
-							<td>
-								<a href="<c:url value='/usuarios/editarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="text-primary"><i class="fas fa-pencil-alt"></i></a>
-								<a href="<c:url value='/usuarios/eliminarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="text-danger"><i class="fas fa-trash-alt"></i></a>
+							<td class="d-flex justify-content-evenly">
+								<a href="<c:url value='/usuarios/editarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="btn btn-outline-primary btn-sm"><i class="fas fa-user-edit"></i></a>
+								<a href="<c:url value='/usuarios/eliminarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="btn btn-outline-danger btn-sm"><i class="fas fa-user-minus"></i></a>
 							</td>
 						</tr>
 					</c:forEach>

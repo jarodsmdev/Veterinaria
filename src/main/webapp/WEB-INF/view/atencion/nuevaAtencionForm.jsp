@@ -1,25 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<!-- BOOTSTRAP v5.2.3 CDN -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-<title>Nueva Atención</title>
-</head>
-<body class="container">
+	<head>
+		<meta charset="UTF-8">
+			<!-- INCRUSTA HEAD -->
+			<jsp:include page="./../partials/head.jsp" />
+		<title>Nueva Atención</title>
+	</head>
+<body>
 	<header>
 		<!-- Incrusta header -->
 		<jsp:include page="../partials/navbar.jsp" />
 	</header>
 
-	<main>
-		<h2 class="text-center">Agregar Atención</h2>
+	<main class="container">
+		<h2 class="text-center my-5">Agregar Atención</h2>
 		<hr>
 
 		<form action="" method="POST" class="need-validation" novalidate>

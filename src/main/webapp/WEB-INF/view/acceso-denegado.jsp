@@ -6,6 +6,9 @@
 <html>
 	<head>
 	<meta charset="UTF-8">
+		<!-- INCRUSTA HEAD -->
+		<jsp:include page="./partials/head.jsp" />
+			
 		<title>Acceso Restringido</title>
 	</head>
 	<body>

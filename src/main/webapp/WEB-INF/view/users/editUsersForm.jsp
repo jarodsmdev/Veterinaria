@@ -6,23 +6,25 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<!-- BOOTSTRAP v5.2.3 CDN -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-		
-		<!-- FONTAWESOME CDN v5.2.0 -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css" integrity="sha512-6c4nX2tn5KbzeBJo9Ywpa0Gkt+mzCzJBrE1RB6fmpcsoN+b/w/euwIMuQKNyUoU/nToKN3a8SgNOtPrbW12fug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+			<!-- INCRUSTA HEAD -->
+			<jsp:include page="./../partials/head.jsp" />
 		
 		<title>Editar Usuario</title>
 	</head>
-	<body class="container">
+	<body>
 		<header>
 			<!-- Incrusta header -->
 			<jsp:include page="./../partials/navbar.jsp" />
 		</header>
 		
-		<main>
+		<main class="container">
 
-			<h2 class="text-center">Editar Usuario</h2>
+			<h2 class="text-center my-5">Editar Usuario</h2>
+			
+			<hr>
+				<a href="${pageContext.request.contextPath}/usuarios/listarUsuarios" class="btn btn-primary btn-sm my-2"><i class="fas fa-users"></i> Listar Usuarios </a>
+			
+			<hr>
 			
 			<form action="${pageContext.request.contextPath}/usuarios/actualizarUsuario" method="POST" class="need-validation" novalidate th:object="${userForm}">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -30,21 +32,29 @@
 				<input type="hidden" name="username_id" value="${user.username}" />
 				
 				<div class="form-floating mb-3">
-					<input type="text" readonly class="form-control-plaintext" id="username" name="username" value="${user.username}" placeholder="Nombre de Usuario" required>
+					<input type="text" readonly class="form-control-plaintext" id="username" name="username" value="${user.username}" placeholder="Nombre de Usuario" required autocomplete="off" />
 					<label for="username">Nombre de Usuario:</label>
 					<div class="invalid-feedback">
 						Debe ingresar nombre de Usuario.
 					</div>
 				</div>
 				
-				<div class="form-floating mb-3">
-					<input type="text" class="form-control form-control-sm" id="password" name="password" value="${user.password}" placeholder="Contraseña" required>
-					<label for="password">Contraseña:</label>
-				</div>
-				
-				<div class="form-floating mb-3">
-					<input type="text" class="form-control form-control-sm" id="password2" name="password2" value="${user.password}" placeholder="Repita su contraseña" required>
-					<label for="password2">Repita su contraseña:</label>
+				<div class="row">
+					<div class="form-floating mb-3 col-6">
+						<input type="text" class="form-control form-control-sm" id="password" name="password" value="${user.password}" placeholder="Contraseña" required autocomplete="off" />
+						<label for="password" class="ms-2">Contraseña:</label>
+						<div class="invalid-feedback errorMsg">
+							Debe ingresar constraseña.
+						</div>
+					</div>
+					
+					<div class="form-floating mb-3 col-6">
+						<input type="text" class="form-control form-control-sm" id="password2" name="password2" value="${user.password}" placeholder="Repita su contraseña" required autocomplete="off" />
+						<label for="password2" class="ms-2">Repita su contraseña:</label>
+						<div class="invalid-feedback errorMsg">
+							Debe ingresar constraseña.
+						</div>
+					</div>
 				</div>
 				
 				<div class="form-check form-switch mb-3">
@@ -65,9 +75,9 @@
 				    </div>
 				    <div class="col-2 text-center">
 				        <br><br>
-				        <button type="button" class="btn btn-primary" id="btn-add-role">&gt;&gt;</button>
+				        <button type="button" class="btn btn-primary btn-sm" id="btn-add-role">&gt;&gt;</button>
 				        <br><br>
-				        <button type="button" class="btn btn-danger" id="btn-remove-role">&lt;&lt;</button>
+				        <button type="button" class="btn btn-danger btn-sm" id="btn-remove-role">&lt;&lt;</button>
 				    </div>
 				    <div class="col-5">
 				        <h5 class="text-center">Roles asignados</h5>
@@ -79,7 +89,10 @@
 				    </div>
 				</div>
 
-				<button type="submit" class="btn btn-success btn-sm w-100 mt-2">Actualizar <i class="fas fa-save"></i></button>
+				<hr>
+				<div class="row justify-content-end mt-2">
+					<button type="submit" class="btn btn-success btn-sm w-50 my-2" id="btnEnviar" disabled>Actualizar <i class="fas fa-save"></i></button>
+				</div>
 			</form>
 
 		</main>
