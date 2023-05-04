@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.jarodsmith.dao.ClienteRowMapper;
 import com.jarodsmith.dao.GenericDAO;
-import com.jarodsmith.dao.UserRowMapper;
 import com.jarodsmith.model.Cliente;
 
+
+@Repository
 public class ClienteDAOImpl implements GenericDAO<Cliente> {
 	
 	@Autowired
@@ -18,7 +20,7 @@ public class ClienteDAOImpl implements GenericDAO<Cliente> {
 	final String GETONE = "SELECT * FROM cliente WHERE idCliente = ?";
 	final String GETONEFORNAME = "SELECT * FROM cliente WHERE nombre = ?";
 	final String GETALL = "SELECT * FROM cliente";
-	final String INSERT = "INSERT INTO cliente(nombre, apellido, idTelefono, direccion, email) VALUES (?, ?, ?, ?, ?)";
+	final String INSERT = "INSERT INTO cliente(nombre, apellido, telefono, direccion, email) VALUES (?, ?, ?, ?, ?)";
 	final String UPDATE = "UPDATE cliente SET nombre = ?, apellido = ?, idTelefono = ?, direccion = ?, email = ? WHERE idCliente = ?";
 	final String DELETE = "DELETE FROM cliente WHERE idCliente = ?";
 
@@ -36,28 +38,25 @@ public class ClienteDAOImpl implements GenericDAO<Cliente> {
 
 	@Override
 	public List<Cliente> obtenerTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Cliente> clienteList = jdbcTemplate.query(GETALL, new ClienteRowMapper());
+		return clienteList;
 	}
 
 	@Override
 	public void insertar(Cliente objeto) {
-		// TODO Auto-generated method stub
-		
+		Object[]params = {objeto.getNombre(), objeto.getApellido(), objeto.getTelefono(), objeto.getDireccion(), objeto.getEmail()};
+		jdbcTemplate.update(INSERT, params);
 	}
 
 	@Override
 	public void actualizar(Cliente objeto) {
-		// TODO Auto-generated method stub
-		
+		Object[]params = {objeto.getNombre(), objeto.getApellido(), objeto.getTelefono(), objeto.getDireccion(), objeto.getEmail(), objeto.getIdCliente()};
+		jdbcTemplate.update(INSERT, params);
 	}
 
 	@Override
 	public void borrar(int id) {
-		// TODO Auto-generated method stub
-		
+		jdbcTemplate.update(DELETE, id);
 	}
-
-
 
 }

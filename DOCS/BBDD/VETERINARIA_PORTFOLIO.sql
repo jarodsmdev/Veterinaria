@@ -56,14 +56,6 @@ VALUES
 ('Leonel','ROLE_USUARIO'),
 ('Leonel','ROLE_ADMINISTRADOR');
 
--- La tabla 'telefono' almacena los números de telefonos de clientes.
--- Es referenciada por la tabla 'clientes' mediante la clave foránea 'idTelefono'.
-DROP TABLE IF EXISTS telefono;
-CREATE TABLE telefono(
-	idTelefono INT AUTO_INCREMENT PRIMARY KEY,
-    telefono VARCHAR(20)
-) ENGINE=InnoDB;
-
 -- La tabla 'especie' almacena los nombres de las especies de los pacientes.
 -- Es referenciada por la tabla 'paciente' mediante la clave foránea 'idEspecie'.
 DROP TABLE IF EXISTS especie;
@@ -80,7 +72,7 @@ CREATE TABLE cliente(
 	idCliente INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50),
     apellido VARCHAR(50),
-    idTelefono INT, /*FK TELEFONO OK*/
+    telefono VARCHAR(50),
     direccion VARCHAR(50),
     email VARCHAR(30)
 ) ENGINE=InnoDB;
@@ -122,10 +114,6 @@ CREATE TABLE servicio(
     servicio VARCHAR(30) NOT NULL,
     valor INT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
-
-/* CREACION DE LLAVE FORANEA TABLA CLIENTE */
-ALTER TABLE cliente
-ADD CONSTRAINT cliente_idfk_1 FOREIGN KEY (idTelefono) REFERENCES telefono (idTelefono) ON DELETE CASCADE;
 
 /* CREACION DE LLAVES FORANEAS TABLA PACIENTE */
 ALTER TABLE paciente
