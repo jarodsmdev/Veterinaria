@@ -19,7 +19,7 @@ public class UserDAOImpl implements GenericDAO<Users> {
 	
 	final String GETONEFORID = "SELECT * FROM users INNER JOIN authorities ON users.username = authorities.username";
 	final String GETONEFORNAME = "SELECT * FROM users WHERE username = ?;";
-	final String GETALL = "SELECT * FROM users;";
+	final String GETALL = "SELECT * FROM users order by username";
 	final String INSERT = "INSERT INTO users (username, password, enabled) VALUES (?, ? , ?)";
 	final String UPDATE = "UPDATE users SET password = ?, enabled = ? WHERE username = ?";
 	final String DELETEFORUSERNAME = "DELETE FROM users WHERE username = ?";

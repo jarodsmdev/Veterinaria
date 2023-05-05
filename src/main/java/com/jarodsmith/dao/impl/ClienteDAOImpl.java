@@ -17,9 +17,9 @@ public class ClienteDAOImpl implements GenericDAO<Cliente> {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	final String GETONE = "SELECT * FROM cliente WHERE idCliente = ?";
+	final String GETONE = "SELECT idCliente, nombre, apellido, telefono, direccion, email FROM cliente WHERE idCliente = ?";
 	final String GETONEFORNAME = "SELECT * FROM cliente WHERE nombre = ?";
-	final String GETALL = "SELECT * FROM cliente";
+	final String GETALL = "SELECT idCliente, nombre, apellido, telefono, direccion, email FROM cliente order by apellido";
 	final String INSERT = "INSERT INTO cliente(nombre, apellido, telefono, direccion, email) VALUES (?, ?, ?, ?, ?)";
 	final String UPDATE = "UPDATE cliente SET nombre = ?, apellido = ?, idTelefono = ?, direccion = ?, email = ? WHERE idCliente = ?";
 	final String DELETE = "DELETE FROM cliente WHERE idCliente = ?";
