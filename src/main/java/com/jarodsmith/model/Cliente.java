@@ -2,6 +2,8 @@
  * @author Leonel Briones Palacios
  * @version 0.0.1
  */
+
+
 package com.jarodsmith.model;
 
 public class Cliente {
@@ -10,32 +12,34 @@ public class Cliente {
 	 * Miembros de Clase: atributos
 	 */
 	private int idCliente;
-	private int idTelefono;
 	private String rut;
 	private String nombre;
 	private String apellido;
+	private String telefono;
 	private String direccion;
 	private String email;
+	
 	
 	/**
 	 * Constructor predeterminado
 	 */
 	public Cliente() {}
 
+
 	/**
-	 * Constructor Parametrizado
+	 * Constructor parametrizado
 	 * @param idCliente
-	 * @param idTelefono
+	 * @param telefono
 	 * @param rut
 	 * @param nombre
 	 * @param apellido
 	 * @param direccion
 	 * @param email
 	 */
-	public Cliente(int idCliente, int idTelefono, String rut, String nombre, String apellido, String direccion,
+	public Cliente(int idCliente, String telefono, String rut, String nombre, String apellido, String direccion,
 			String email) {
 		this.idCliente = idCliente;
-		this.idTelefono = idTelefono;
+		this.telefono = telefono;
 		this.rut = rut;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -51,12 +55,12 @@ public class Cliente {
 		this.idCliente = idCliente;
 	}
 
-	public int getIdTelefono() {
-		return idTelefono;
+	public String getTelefono() {
+		return telefono;
 	}
 
-	public void setIdTelefono(int idTelefono) {
-		this.idTelefono = idTelefono;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 	public String getRut() {
@@ -98,12 +102,20 @@ public class Cliente {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	/**
+	 * Método que concatena nombre y apellido de Cliente y los retorna en String
+	 * @return String
+	 */
+	public String nombreCompleto() {
+		return this.getNombre() + " "+ this.getApellido();
+	}
 
 	@Override
 	public String toString() {
-		return "Cliente [idCliente=" + idCliente + ", idTelefono=" + idTelefono + ", rut=" + rut + ", nombre=" + nombre
+		return "Cliente [idCliente=" + idCliente + ", telefono=" + telefono + ", rut=" + rut + ", nombre=" + nombre
 				+ ", apellido=" + apellido + ", direccion=" + direccion + ", email=" + email + "]";
 	}
-	
+
 	
 }

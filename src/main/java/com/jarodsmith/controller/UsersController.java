@@ -100,7 +100,7 @@ public class UsersController {
 		        authorities.setUsername(userForm.getUsername());
 		        authorities.setAuthority(rol);
 		        
-		        System.out.println("[ACTUALIZARUSUARIO]: " + authorities.toString());
+		        //System.out.println("[ACTUALIZARUSUARIO]: " + authorities.toString()); //DEBUG
 		        
 		        //GUARDAR AUTHORITIES EN LA BD
 		        authoritiesDAO.insertar(authorities);

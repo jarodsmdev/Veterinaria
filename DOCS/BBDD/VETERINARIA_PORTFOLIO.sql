@@ -56,14 +56,6 @@ VALUES
 ('Leonel','ROLE_USUARIO'),
 ('Leonel','ROLE_ADMINISTRADOR');
 
--- La tabla 'telefono' almacena los números de telefonos de clientes.
--- Es referenciada por la tabla 'clientes' mediante la clave foránea 'idTelefono'.
-DROP TABLE IF EXISTS telefono;
-CREATE TABLE telefono(
-	idTelefono INT AUTO_INCREMENT PRIMARY KEY,
-    telefono VARCHAR(20)
-) ENGINE=InnoDB;
-
 -- La tabla 'especie' almacena los nombres de las especies de los pacientes.
 -- Es referenciada por la tabla 'paciente' mediante la clave foránea 'idEspecie'.
 DROP TABLE IF EXISTS especie;
@@ -78,9 +70,10 @@ CREATE TABLE especie(
 DROP TABLE IF EXISTS cliente;
 CREATE TABLE cliente(
 	idCliente INT AUTO_INCREMENT PRIMARY KEY,
+    rutCliente VARCHAR(20),
     nombre VARCHAR(50),
     apellido VARCHAR(50),
-    idTelefono INT, /*FK TELEFONO OK*/
+    telefono VARCHAR(50),
     direccion VARCHAR(50),
     email VARCHAR(30)
 ) ENGINE=InnoDB;
@@ -123,10 +116,6 @@ CREATE TABLE servicio(
     valor INT NOT NULL DEFAULT 0
 ) ENGINE=InnoDB;
 
-/* CREACION DE LLAVE FORANEA TABLA CLIENTE */
-ALTER TABLE cliente
-ADD CONSTRAINT cliente_idfk_1 FOREIGN KEY (idTelefono) REFERENCES telefono (idTelefono) ON DELETE CASCADE;
-
 /* CREACION DE LLAVES FORANEAS TABLA PACIENTE */
 ALTER TABLE paciente
 ADD CONSTRAINT paciente_idfk_1 FOREIGN KEY (idCliente) REFERENCES cliente (idCliente),
@@ -138,5 +127,12 @@ ADD CONSTRAINT atencion_idfk_1 FOREIGN KEY (idPaciente) REFERENCES paciente (idP
 ADD CONSTRAINT atencion_idfk_2 FOREIGN KEY (idServicio) REFERENCES servicio (idServicio),
 ADD CONSTRAINT atencion_idfk_3 FOREIGN KEY (username) REFERENCES users (username);
 
+SELECT * FROM cliente order by apellido;
+
+SELECT * FROM users
+INNER JOIN authorities
+ON users.username = authorities.username;
+
+select * from cliente;
 
 

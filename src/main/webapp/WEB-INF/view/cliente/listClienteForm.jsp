@@ -9,7 +9,7 @@
 			<!-- INCRUSTA HEAD -->
 			<jsp:include page="./../partials/head.jsp" />
 		
-		<title>Usuarios</title>
+		<title>Lista Clientes</title>
 	</head>
 	<body>
 		<header>
@@ -18,7 +18,7 @@
 		</header>
 		
 		<main  class="container">
-			<h2 class="text-center my-5">Lista de Usuarios</h2>
+			<h2 class="text-center my-5">Lista de Clientes</h2>
 			
 			<hr>
 			
@@ -29,36 +29,31 @@
 				</div>
 			</c:if>
 			
-			<a href="${pageContext.request.contextPath}/usuarios/nuevoUsuario" class="btn btn-primary btn-sm my-2"><i class="fas fa-plus-circle"></i> Crear Usuario</a>
+			<a href="${pageContext.request.contextPath}/cliente/nuevoCliente" class="btn btn-primary btn-sm my-2"><i class="fas fa-plus-circle"></i> Crear Cliente</a>
 			
 			<hr>
 		
 			<div class="table-responsive">
-				<table class="table table-bordered table-striped table-hover table-sm">
+				<table class="table table-bordered table-striped table-hover table-sm mb-5">
 					<thead>
 						<tr>
-							<th>Usuario</th>
-							<th>Contraseña</th>
-							<th>Habilitado</th>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Teléfono</th>
+							<th>email</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${datos}" var="dato">
+						<c:forEach items="${clientes}" var="cliente">
 							<tr>
-								<td><c:out value="${dato.username}" /></td>
-								<td><c:out value="${dato.password}" /></td>
-								<td class="text-center">
-									  <c:if test="${dato.enabled == 1}">
-	    								<i class="fas fa-check-circle text-success"></i>
-	  								</c:if>
-									<c:if test="${dato.enabled != 1}">
-									    <i class="fas fa-times-circle text-danger"></i>
-									</c:if>
-								</td>
+								<td><c:out value="${cliente.nombre}" /></td>
+								<td><c:out value="${cliente.apellido}" /></td>
+								<td><c:out value="${cliente.telefono}" /></td>
+								<td><c:out value="${cliente.email}" /></td>
 								<td class="d-flex justify-content-evenly">
-									<a href="<c:url value='/usuarios/editarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="btn btn-outline-primary btn-sm mx-1"><i class="fas fa-user-edit"></i></a>
-									<a href="<c:url value='/usuarios/eliminarUsuario'><c:param name='usuario' value='${dato.username}' /></c:url>" class="btn btn-outline-danger btn-sm mx-1"><i class="fas fa-user-minus"></i></a>
+									<a href="<c:url value='/cliente/editarCliente'><c:param name='cliente' value='${cliente.idCliente}' /></c:url>" class="btn btn-outline-primary btn-sm mx-1"><i class="fas fa-user-edit"></i></a>
+									<a href="<c:url value='/cliente/eliminarCliente'><c:param name='cliente' value='${cliente.idCliente}' /></c:url>" class="btn btn-outline-danger btn-sm mx-1"><i class="fas fa-user-minus"></i></a>
 								</td>
 							</tr>
 						</c:forEach>

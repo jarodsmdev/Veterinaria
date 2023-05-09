@@ -1,3 +1,0 @@
-/**
- * ESTO ES UN ARCHIVO JAVASCRIPT
- */

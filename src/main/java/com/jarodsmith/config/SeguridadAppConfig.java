@@ -31,7 +31,6 @@ public class SeguridadAppConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
 		//auth.jdbcAuthentication().dataSource(seguridadDataSource);
-		//auth.jdbcAuthentication().passwordEncoder(passwordEncoder());
 	    auth.jdbcAuthentication()
 	        .dataSource(seguridadDataSource)
 	        .passwordEncoder(passwordEncoder());
