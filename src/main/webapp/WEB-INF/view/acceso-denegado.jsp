@@ -24,4 +24,9 @@
 			<li><a href="${pageContext.request.contextPath}/">Volver a Inicio</a></li>
 		</ul>
 	</body>
+	
+		<div>
+		<!-- Incrusta footer -->
+		<jsp:include page="./partials/footer.jsp" />
+	</div>
 </html>

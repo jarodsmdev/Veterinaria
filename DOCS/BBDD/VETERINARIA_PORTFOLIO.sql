@@ -70,6 +70,7 @@ CREATE TABLE especie(
 DROP TABLE IF EXISTS cliente;
 CREATE TABLE cliente(
 	idCliente INT AUTO_INCREMENT PRIMARY KEY,
+    rutCliente VARCHAR(20),
     nombre VARCHAR(50),
     apellido VARCHAR(50),
     telefono VARCHAR(50),
@@ -126,5 +127,12 @@ ADD CONSTRAINT atencion_idfk_1 FOREIGN KEY (idPaciente) REFERENCES paciente (idP
 ADD CONSTRAINT atencion_idfk_2 FOREIGN KEY (idServicio) REFERENCES servicio (idServicio),
 ADD CONSTRAINT atencion_idfk_3 FOREIGN KEY (username) REFERENCES users (username);
 
+SELECT * FROM cliente order by apellido;
+
+SELECT * FROM users
+INNER JOIN authorities
+ON users.username = authorities.username;
+
+select * from cliente;
 
 

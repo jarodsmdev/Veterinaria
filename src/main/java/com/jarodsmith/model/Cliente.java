@@ -12,10 +12,10 @@ public class Cliente {
 	 * Miembros de Clase: atributos
 	 */
 	private int idCliente;
-	private String telefono;
 	private String rut;
 	private String nombre;
 	private String apellido;
+	private String telefono;
 	private String direccion;
 	private String email;
 	

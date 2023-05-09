@@ -63,8 +63,10 @@
 
 		</main>
 		
-		<footer>
-		</footer>
+	<div>
+		<!-- Incrusta footer -->
+		<jsp:include page="./../partials/footer.jsp" />
+	</div>
 		
 		<script>
 		//SCRIPT QUE CONTROLA EL CAMBIO DE VALUE DE 1 O 0 DEL CHECKBOX PARA LUEGO SER ENVIADO AL CONTROLADOR Y SETEE A ENABLED EL USUARIO.

@@ -63,26 +63,28 @@
 				<input type="text" readonly class="form-control-plaintext" id="peso" value="20,4" />
 				<label 	for="peso">Peso (Kgs.):</label>
 			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<!-- SELECTOR DE SERVICIOS -->
+				<select class="form-select my-3" size=5 aria-label=".form-select example" id="servicios" style="height:200px;" >
+		
+					<option value="1">SERVICIO A</option>
+					<option value="2">SERVICIO B</option>
+					<option value="3">SERVICIO C</option>		
+				</select>
+				<input type="button" class="btn btn-primary btn-sm mb-3" value="Agregar" id="agregarServicio"  />
+			</div>
 			
-			<!-- SELECTOR DE SERVICIOS -->
-			<select class="form-select mb-3" size=5 aria-label=".form-select example" id="servicios">
-
-				<option value="1">SERVICIO A</option>
-				<option value="2">SERVICIO B</option>
-				<option value="3">SERVICIO C</option>		
-			</select>
-			<input type="button" class="btn btn-primary btn-sm mb-3" value="Agregar" id="agregarServicio"/>
-			
-			<select class="form-select mb-3" size=5 aria-label="multiple select example" id="opciones">
-  
-
-			</select>
-			<input type="button" class="btn btn-danger btn-sm mb-3" value="Quitar" id="quitarServicio"/>
+			<div class="col-sm-6">
+				<select class="form-select my-3" size=5 aria-label="multiple select example" id="opciones" style="height:200px;"></select>
+				<input type="button" class="btn btn-danger btn-sm mb-3" value="Quitar" id="quitarServicio"/>	
+			</div>
 		</div>
 
-			<div class="mb-3">
-				<input type="submit" value="Guardar"
-					class="btn btn-success btn-sm w-25" />
+			<div class="my-5">
+				<input type="submit" value="Guardar" class="btn btn-success btn-sm w-25" />
 			</div>
 
 		</form>
@@ -98,5 +100,9 @@
 	<!-- CUSTOM JS -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/atencionFunciones.js"></script>
 </body>
-<footer> </footer>
+
+	<div>
+		<!-- Incrusta footer -->
+		<jsp:include page="./../partials/footer.jsp" />
+	</div>
 </html>

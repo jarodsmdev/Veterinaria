@@ -97,8 +97,10 @@
 
 		</main>
 		
-		<footer>
-		</footer>
+	<div>
+		<!-- Incrusta footer -->
+		<jsp:include page="./../partials/footer.jsp" />
+	</div>
 		
 		<!-- SELECCION DE ROLES JS -->
 		<script src="${pageContext.request.contextPath}/resources/js/seleccionRoles.js"></script>
