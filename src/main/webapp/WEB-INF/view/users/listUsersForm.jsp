@@ -65,6 +65,25 @@
 					</tbody>
 			
 				</table>
+				
+			</div>
+			
+			<div class="table-responsive mt-5">
+			<h3>Resumen de Usuarios vs Roles</h3>
+				<table class="table table-bordered table-striped table-hover table-sm">
+					<thead>
+						<th>Usuario</th>
+						<th>Cantidad Roles</th>
+					</thead>
+					<tbody>
+					 <c:forEach items="${resumen}" var="resumen">
+					      <tr>
+					        <td>${resumen.username}</td>
+					        <td>${resumen.num_roles}</td>
+					      </tr>
+					    </c:forEach>
+					</tbody>
+				</table>
 			</div>
 		</main>
 		

@@ -2,11 +2,13 @@ package com.jarodsmith.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 
@@ -35,6 +37,9 @@ public class UsersController {
 	@Autowired
 	private AuthoritiesDAOImpl authoritiesDAO;
 	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
 	/**
 	* Devuelve una vista con la lista de usuarios obtenidos desde la base de datos.
 	* @return ModelAndView objeto que representa la vista de la lista de usuarios
@@ -42,8 +47,12 @@ public class UsersController {
 	@GetMapping("/listarUsuarios")
 	public ModelAndView listaUsuarios() {
 		List<Users> users = userDAO.obtenerTodos();
+		final String GETONEWITHROLES = "SELECT users.username, COUNT(authorities.authority) AS num_roles FROM users INNER JOIN authorities ON users.username = authorities.username GROUP BY users.username ORDER BY users.username";
+		List<Map<String, Object>> resumenUsuarios = jdbcTemplate.queryForList(GETONEWITHROLES);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("datos", users);
+		mav.addObject("resumen", resumenUsuarios);
 		mav.setViewName("users/listUsersForm");
 		return mav;
 	}
@@ -151,7 +160,7 @@ public class UsersController {
 		}else {
 
 			try {
-				System.out.println("[USERCONTROLLER] " + userForm);
+				//System.out.println("[USERCONTROLLER] " + userForm); //DEBUG
 				
 				ModelAndView mav = new ModelAndView();
 				

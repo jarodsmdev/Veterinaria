@@ -22,6 +22,7 @@ public class UserDAOImpl implements GenericDAO<Users> {
 	final String INSERT = "INSERT INTO users (username, password, enabled) VALUES (?, ? , ?)";
 	final String UPDATE = "UPDATE users SET password = ?, enabled = ? WHERE username = ?";
 	final String DELETEFORUSERNAME = "DELETE FROM users WHERE username = ?";
+	
 
 	@Override
 	public Users buscarPorId(int id) {
