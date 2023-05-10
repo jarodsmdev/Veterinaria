@@ -83,12 +83,13 @@ public class ClienteController {
 	}
 	
 	//PERMITE EL GUARDADO DEFINITIVO EN LA BBDD
-	@PostMapping("/ActualizarCliente")
+	@PostMapping("/actualizarCliente")
 	public ModelAndView actualizarCliente(@ModelAttribute("clienteForm") Cliente clienteForm) {
 		ModelAndView mav = new ModelAndView();
+		//System.out.println(clienteForm.toString()); //DEBUG
 		clienteDAO.actualizar(clienteForm);
 		//REDIRECCIONAR AL LISTADO DE CLIENTES
-		mav.setViewName("redirect:/clientes/listarClientes");
+		mav.setViewName("redirect:/cliente/listarClientes");
 		return mav;
 	}
 	

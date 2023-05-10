@@ -27,7 +27,8 @@
 			
 			<hr>
 			
-			<form:form action="crearCliente" modelAttribute="cliente" method="POST" class="need-validation" novalidate="true">
+			<form:form action="actualizarCliente" modelAttribute="cliente" method="POST" class="need-validation" novalidate="true">
+			<form:input path="idCliente" type="hidden" name="cliente_id" />
 			<div class="form-floating mb-3" >
 				<form:input path="rut" type="text" class="form-control form-control-sm" id="rut" name="rut" placeholder="Ingrese RUT Cliente" required="true" />
 				<label for="rut" class="">RUT Cliente:</label>

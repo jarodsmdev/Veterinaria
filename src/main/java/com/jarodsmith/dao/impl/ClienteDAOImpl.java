@@ -21,7 +21,7 @@ public class ClienteDAOImpl implements GenericDAO<Cliente> {
 	final String GETONEFORNAME = "SELECT * FROM cliente WHERE nombre = ?";
 	final String GETALL = "SELECT * FROM cliente order by apellido";
 	final String INSERT = "INSERT INTO cliente(rutCliente, nombre, apellido, telefono, direccion, email) VALUES (?, ?, ?, ?, ?, ?)";
-	final String UPDATE = "UPDATE cliente SET nombre = ?, apellido = ?, idTelefono = ?, direccion = ?, email = ? WHERE idCliente = ?";
+	final String UPDATE = "UPDATE cliente SET rutCliente = ?, nombre = ?, apellido = ?, telefono = ?, direccion = ?, email = ? WHERE idCliente = ?";
 	final String DELETE = "DELETE FROM cliente WHERE idCliente = ?";
 
 	@Override
@@ -50,8 +50,8 @@ public class ClienteDAOImpl implements GenericDAO<Cliente> {
 
 	@Override
 	public void actualizar(Cliente objeto) {
-		Object[]params = {objeto.getNombre(), objeto.getApellido(), objeto.getTelefono(), objeto.getDireccion(), objeto.getEmail(), objeto.getIdCliente()};
-		jdbcTemplate.update(INSERT, params);
+		Object[]params = {objeto.getRut(), objeto.getNombre(), objeto.getApellido(), objeto.getTelefono(), objeto.getDireccion(), objeto.getEmail(), objeto.getIdCliente()};
+		jdbcTemplate.update(UPDATE, params);
 	}
 
 	@Override
