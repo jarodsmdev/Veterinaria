@@ -18,6 +18,7 @@
 			<h2 class="text-center my-5">Consulta Veterinaria</h2>
 			
 			<hr>
+			<p class="text-danger">AVISO: PÁGINA EN CONSTRUCCIÓN. SE ENCUENTRAN OPERATIVO LOS MÓDULOS DE CLIENTE Y USUARIOS.</p>
 			<img src="${pageContext.request.contextPath}/resources/img/1.jpg" class="img-fluid" alt="...">
 		</main>
 		

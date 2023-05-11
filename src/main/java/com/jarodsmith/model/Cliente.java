@@ -6,7 +6,7 @@
 
 package com.jarodsmith.model;
 
-public class Cliente {
+public class Cliente extends Base{
 	
 	/**
 	 * Miembros de Clase: atributos
@@ -29,23 +29,25 @@ public class Cliente {
 	/**
 	 * Constructor parametrizado
 	 * @param idCliente
-	 * @param telefono
 	 * @param rut
 	 * @param nombre
 	 * @param apellido
+	 * @param telefono
 	 * @param direccion
 	 * @param email
 	 */
-	public Cliente(int idCliente, String telefono, String rut, String nombre, String apellido, String direccion,
+	public Cliente(int idCliente, String rut, String nombre, String apellido, String telefono, String direccion,
 			String email) {
+		super();
 		this.idCliente = idCliente;
-		this.telefono = telefono;
 		this.rut = rut;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.telefono = telefono;
 		this.direccion = direccion;
 		this.email = email;
 	}
+
 
 	public int getIdCliente() {
 		return idCliente;

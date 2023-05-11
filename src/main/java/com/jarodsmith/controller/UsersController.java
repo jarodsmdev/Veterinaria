@@ -47,7 +47,12 @@ public class UsersController {
 	@GetMapping("/listarUsuarios")
 	public ModelAndView listaUsuarios() {
 		List<Users> users = userDAO.obtenerTodos();
-		final String GETONEWITHROLES = "SELECT users.username, COUNT(authorities.authority) AS num_roles FROM users INNER JOIN authorities ON users.username = authorities.username GROUP BY users.username ORDER BY users.username";
+		
+		final String GETONEWITHROLES = "SELECT users.username, COUNT(authorities.authority) AS num_roles FROM users" 
+										+ " INNER JOIN authorities ON users.username = authorities.username"
+										+ " GROUP BY users.username"
+										+ " ORDER BY users.username";
+		
 		List<Map<String, Object>> resumenUsuarios = jdbcTemplate.queryForList(GETONEWITHROLES);
 		
 		ModelAndView mav = new ModelAndView();

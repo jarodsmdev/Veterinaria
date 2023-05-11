@@ -18,8 +18,9 @@
 	<main class="container">
 		<h2 class="text-center my-5">Agregar Paciente</h2>
 		<hr>
-			
-		<form action="" method="POST" class="need-validation" novalidate>
+		<p class="text-danger">FUNCIONALIDAD EN ESTA VENTANA NO ESTÁ IMPLEMENTADA AÚN</p>
+		
+		<form action="" method="" class="need-validation" novalidate>
 			<div class="form-floating mb-3">
 				<select class="form-select" id="especie" aria-label="Floating label select example">
 					<option selected disabled>Seleccione Especie</option>

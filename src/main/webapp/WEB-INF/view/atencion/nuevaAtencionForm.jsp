@@ -17,8 +17,10 @@
 	<main class="container">
 		<h2 class="text-center my-5">Agregar Atención</h2>
 		<hr>
+		
+		<p class="text-danger">FUNCIONALIDAD EN ESTA VENTANA NO ESTÁ IMPLEMENTADA AÚN</p>
 
-		<form action="" method="POST" class="need-validation" novalidate>
+		<form action="" method="" class="need-validation" novalidate>
 		
 		<div class="row">
 			<div class="form-floating mb-1 col-6 col-sm-4 border">

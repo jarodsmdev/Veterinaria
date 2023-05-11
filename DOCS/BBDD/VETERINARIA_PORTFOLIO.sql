@@ -129,10 +129,21 @@ ADD CONSTRAINT atencion_idfk_3 FOREIGN KEY (username) REFERENCES users (username
 
 SELECT * FROM cliente order by apellido;
 
-SELECT * FROM users
+SELECT users.username, users.password, users.enabled, authorities.authority FROM users
 INNER JOIN authorities
 ON users.username = authorities.username;
 
+SELECT users.username, MAX(users.password) AS password, MAX(users.enabled) AS enabled, MAX(authorities.authority) AS authority
+FROM users
+INNER JOIN authorities ON users.username = authorities.username
+GROUP BY users.username;
+
 select * from cliente;
 
+update cliente set rutCliente = 456 where idCliente = 12;
 
+SELECT users.username, COUNT(authorities.authority) AS num_roles
+FROM users
+INNER JOIN authorities ON users.username = authorities.username
+GROUP BY users.username
+ORDER BY users.username;

@@ -18,9 +18,9 @@
 				<div class="col-lg-3 col-md-6 mb-4 mb-md-0">
 					<h5 class="text-uppercase">Contacto</h5>
 					<ul class="list-unstyled mb-0">
-						<li><a href="#!" class="text-dark">Dirección: Calle Falsa 123</a></li>
-						<li><a href="#!" class="text-dark">Teléfono: +1234567890</a></li>
-
+						<li><a href="#!" class="text-dark"><i class="fas fa-map-marker-alt text-danger"></i> Calle Falsa 123 - Quillota</a></li>
+						<li><a href="#!" class="text-dark"><i class="fas fa-phone"></i> +56934567890</a></li>
+						<li><a href="https://github.com/jarodsmdev/Veterinaria" target="_blank" class="text-dark"><i class="fab fa-github"></i> Github</a></li>
 					</ul>
 				</div>
 			</div>
