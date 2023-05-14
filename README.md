@@ -19,7 +19,7 @@ En el directorio `Veterinaria/Evidence.pdf` se encuentra un documento PDF demost
 
 Antes de ejecutar la aplicación, asegúrate de tener instalado lo siguiente:
 
-- Java 17: Descargar e instalar Java 1.8
+- Java 1.8: Descargar e instalar Java 1.8
 - MySQL: Descargar e instalar MySQL
 - IDE Eclipse: Descargar e instalar Eclipse
 - Maven: Descargar e instalar Maven
