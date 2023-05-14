@@ -61,7 +61,7 @@ public class UsersRestController {
 
 	@PostMapping("/addUser")
 	public ResponseEntity<Users> crearUsuario(@RequestBody Users usuario) {
-	    // Lógica para crear un usuario en la base de datos
+
 	    // GUARDAR USUARIO EN LA BD
 	    userDAO.insertar(usuario);
 

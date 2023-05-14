@@ -24,10 +24,7 @@ CREATE TABLE users(
 INSERT INTO users
 VALUES
 ('Admin', '$2a$10$/YoeJjW5u7KwfO7KKv59k.xm/iuqTM6NRR3jEOZ.Lb7W/LEx2pL3W', 1),
-('Leonel', '$2a$10$/YoeJjW5u7KwfO7KKv59k.xm/iuqTM6NRR3jEOZ.Lb7W/LEx2pL3W', 1),
-('Viviana', '$2a$10$/YoeJjW5u7KwfO7KKv59k.xm/iuqTM6NRR3jEOZ.Lb7W/LEx2pL3W', 1),
-('Antonella', '$2a$10$/YoeJjW5u7KwfO7KKv59k.xm/iuqTM6NRR3jEOZ.Lb7W/LEx2pL3W', 1),
-('Isidora', '{noop}123', 1);
+('Leonel', '$2a$10$/YoeJjW5u7KwfO7KKv59k.xm/iuqTM6NRR3jEOZ.Lb7W/LEx2pL3W', 1);
 
 -- Crea la tabla 'authorities' que almacena los roles de los usuarios
 -- La tabla tiene dos columnas: username y authority
@@ -50,11 +47,7 @@ INSERT INTO authorities
 VALUES 
 ('Admin','ROLE_USUARIO'),
 ('Admin','ROLE_ADMINISTRADOR'),
-('Isidora','ROLE_USUARIO'),
-('Antonella','ROLE_USUARIO'),
-('Viviana','ROLE_AYUDANTE'),
-('Leonel','ROLE_USUARIO'),
-('Leonel','ROLE_ADMINISTRADOR');
+('Leonel','ROLE_USUARIO');
 
 -- La tabla 'especie' almacena los nombres de las especies de los pacientes.
 -- Es referenciada por la tabla 'paciente' mediante la clave foránea 'idEspecie'.
